@@ -3,13 +3,14 @@
 
 #include <check.h>
 
-#include "../s21_matrix.h"
+#include "../my_matrix/my_matrix.h"
 
-void static_to_dinamic(double temp[][3], matrix_t *test);
+void static_to_dynamic(double temp[][3], matrix_t *test);
 void compare_matrix(matrix_t test, double result[][3]);
 Suite *test_matrix();
 
-static int create_matrix[5][2] = {{1, 2}, {0, 5}, {3, 3}, {1, 1}, {2, 1}};
+static int create_matrix_proportions[5][2] = {
+    {1, 2}, {0, 5}, {3, 3}, {1, 1}, {2, 1}};
 
 static int create_return[] = {0, 1, 0, 0, 0};
 
@@ -67,8 +68,8 @@ static double transpose_results[5][3][3] = {
 static double calc_comlements_results[5][3][3] = {
     {{24, -0, 0}, {-12, 6, -0}, {-2, -5, 4}},
     {{0, -2, 8}, {-0, 1, -4}, {0, -0, 0}},
-    {{10, -0, 0}, {1, -2, 1}, {-8, -2, 4}},
-    {{0, -0, 0}, {4, -14, 8}, {-8, -2, 4}},
+    {{10, 4, -8}, {1, -2, 1}, {-8, -2, 4}},
+    {{0, 10, -20}, {4, -14, 8}, {-8, -2, 4}},
     {{-1, 38, -27}, {1, -41, 29}, {-1, 34, -24}}};
 
 static double determinant_result[] = {24, 0, -6, -40, -1};
@@ -77,9 +78,9 @@ static double inverse_results[5][3][3] = {
     {{1, -0.5, -0.0833333}, {-0, 0.25, -0.208333}, {0, -0, 0.166667}},
     {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
     {{-1.66667, -0.166667, 1.33333},
-     {0, 0.333333, 0.333333},
-     {0, -0.166667, -0.666667}},
-    {{-0, -0.1, 0.2}, {0, 0.35, 0.05}, {-0, -0.2, -0.1}},
+     {-0.666667, 0.333333, 0.333333},
+     {1.33333, -0.166667, -0.666667}},
+    {{-0, -0.1, 0.2}, {-0.25, 0.35, 0.05}, {0.5, -0.2, -0.1}},
     {{1, -1, 1}, {-38, 41, -34}, {27, -29, 24}}};
 
 static int inverse_return[] = {0, 2, 0, 0, 0};

@@ -10,14 +10,14 @@ else
 	OPEN_CMD = xdg-open
 endif
 
-all: clean s21_matrix.a test gcov_report
+all: clean my_matrix.a test gcov_report
 
-s21_matrix.a:
-	gcc $(CC) -c s21_*.c
-	ar -crs s21_matrix.a s21_*.o
+my_matrix.a:
+	gcc $(CC) -c my_matrix/my_*.c
+	ar -crs my_matrix/my_matrix.a my_*.o
 
 gcov_report: clean
-	gcc $(CC) tests/tests.c s21_*.c $(FLAGS) -o test
+	gcc $(CC) tests/tests.c my_matrix/my_*.c $(FLAGS) -o test
 	./test
 	lcov -t "./test"  -o report.info --no-external -c -d .
 	genhtml -o report report.info
@@ -26,12 +26,12 @@ gcov_report: clean
 	rm -rf *.gcno *gcda *.gco
 
 clean:
-	rm -rf *.o *.a test
+	rm -rf *.o my_matrix/*.a test
 	rm -rf *.gcno *gcda *.gcov gcov
 	rm -rf report report.info
 
-rebuild: clean s21_matrix.a test
+rebuild: clean my_matrix.a test
 
-test: s21_matrix.a
-	gcc $(CC) tests/tests.c s21_matrix.a $(FLAGS) -lgcov -coverage -o test
+test: my_matrix.a
+	gcc $(CC) tests/tests.c my_matrix/my_matrix.a $(FLAGS) -lgcov -coverage -o test
 	./test

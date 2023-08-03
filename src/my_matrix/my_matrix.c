@@ -1,6 +1,6 @@
-#include "s21_matrix.h"
+#include "my_matrix.h"
 
-int s21_create_matrix(int rows, int columns, matrix_t *result) {
+int create_matrix(int rows, int columns, matrix_t *result) {
   int status = INCORRECT_MATRIX;
   if (rows > 0 && columns > 0) {
     result->matrix = calloc(rows, sizeof(double *));
@@ -25,7 +25,7 @@ int s21_create_matrix(int rows, int columns, matrix_t *result) {
   return status;
 }
 
-void s21_remove_matrix(matrix_t *A) {
+void remove_matrix(matrix_t *A) {
   if (A) {
     if (A->matrix) {
       for (int i = 0; i < A->rows; i++) free(A->matrix[i]);
@@ -37,7 +37,7 @@ void s21_remove_matrix(matrix_t *A) {
   }
 }
 
-int s21_eq_matrix(matrix_t *A, matrix_t *B) {
+int is_eq_matrix(matrix_t *A, matrix_t *B) {
   int status = FAILURE;
   if (A && B) {
     if (A->rows == B->rows && A->columns == B->columns && A->rows > 0 &&
